@@ -10,7 +10,6 @@ services:
 
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: pizza
 
     ports:
       - "3306:3306"
