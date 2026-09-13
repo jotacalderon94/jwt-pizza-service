@@ -1,0 +1,22 @@
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+
+    container_name: jwt-pizza-db
+
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: pizza
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - jwt-pizza-data:/var/lib/mysql
+
+volumes:
+  jwt-pizza-data:
