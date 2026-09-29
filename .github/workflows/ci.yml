@@ -69,35 +69,9 @@ jobs:
           version=$(date +'%Y%m%d.%H%M%S')
           echo "version=$version" >> "$GITHUB_OUTPUT"
           printf '{"version": "%s" }' "$version" > src/version.json
-      - name: Verify secrets
-        run: |
-          if [ -z "${{ secrets.NET_ID }}" ]; then
-            echo "NET_ID is EMPTY"
-            exit 1
-          else
-            echo "NET_ID is SET"
-          fi
 
-          if [ -z "${{ secrets.FACTORY_API_KEY }}" ]; then
-            echo "FACTORY_API_KEY is EMPTY"
-            exit 1
-          else
-            echo "FACTORY_API_KEY is SET"
-          fi
       - name: Update coverage
-        env:
-          NET_ID: ${{ secrets.NET_ID }}
-          FACTORY_API_KEY: ${{ secrets.FACTORY_API_KEY }}
         run: |
           coverage=$(jq '.total.lines.pct' coverage/coverage-summary.json)
           color=$(echo "$coverage < 80" | bc | awk '{if ($1) print "red"; else print "green"}')
-
-          echo "Coverage: $coverage"
-          echo "Color: $color"
-          echo "NET_ID length: ${#NET_ID}"
-
-          curl --fail-with-body -X POST \
-            "https://pizza-factory.cs329.click/api/badge/$NET_ID/jwtpizzaservicecoverage?label=Coverage&value=$coverage%25&color=$color" \
-            -H "authorization: bearer $FACTORY_API_KEY"
-
-      
+          curl -s -X POST "https://pizza-factory.cs329.click/api/badge/${{ secrets.NET_ID }}/jwtpizzaservicecoverage?label=Coverage&value=$coverage%25&color=$color" -H "authorization: bearer ${{ secrets.FACTORY_API_KEY }}"
