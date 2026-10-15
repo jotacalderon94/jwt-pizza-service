@@ -75,29 +75,145 @@ class DB {
     }
   }
 
-  async updateUser(userId, name, email, password) {
-    const connection = await this.getConnection();
-    try {
-      const params = [];
-      if (password) {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        params.push(`password='${hashedPassword}'`);
-      }
-      if (email) {
-        params.push(`email='${email}'`);
-      }
-      if (name) {
-        params.push(`name='${name}'`);
-      }
-      if (params.length > 0) {
-        const query = `UPDATE user SET ${params.join(', ')} WHERE id=${userId}`;
-        await this.query(connection, query);
-      }
-      return this.getUser(email, password);
-    } finally {
-      connection.end();
+async updateUser(userId, name, email, password) {
+  const connection = await this.getConnection();
+
+  try {
+    const existing = await this.query(
+      connection,
+      'SELECT id, email FROM user WHERE id=?',
+      [userId]
+    );
+
+    if (existing.length === 0) {
+      throw new StatusCodeError('unknown user', 404);
     }
+
+    const updates = [];
+    const values = [];
+
+    if (password !== undefined) {
+      updates.push('password=?');
+      values.push(await bcrypt.hash(password, 10));
+    }
+
+    if (email !== undefined) {
+      updates.push('email=?');
+      values.push(email);
+    }
+
+    if (name !== undefined) {
+      updates.push('name=?');
+      values.push(name);
+    }
+
+    if (updates.length > 0) {
+      values.push(userId);
+
+      try {
+        await this.query(
+          connection,
+          `UPDATE user SET ${updates.join(', ')} WHERE id=?`,
+          values
+        );
+      } catch (error) {
+        if (error.code === 'ER_DUP_ENTRY') {
+          throw new StatusCodeError('email already exists', 409);
+        }
+        throw error;
+      }
+    }
+
+    const updatedEmail = email ?? existing[0].email;
+    return await this.getUser(updatedEmail);
+  } finally {
+    await connection.end();
   }
+}
+
+async getUsers(page = 1, limit = 10, nameFilter = '*') {
+  const connection = await this.getConnection();
+
+  try {
+    const offset = (page - 1) * limit;
+    const pattern = nameFilter.replace(/\*/g, '%');
+
+    let users = await this.query(
+      connection,
+      `SELECT id, name, email
+       FROM user
+       WHERE name LIKE ?
+       ORDER BY id
+       LIMIT ${limit + 1} OFFSET ${offset}`,
+      [pattern]
+    );
+
+    const more = users.length > limit;
+    users = users.slice(0, limit);
+
+    for (const user of users) {
+      const roles = await this.query(
+        connection,
+        'SELECT role, objectId FROM userRole WHERE userId=?',
+        [user.id]
+      );
+
+      user.roles = roles.map((role) => ({
+        role: role.role,
+        objectId: role.objectId || undefined,
+      }));
+    }
+
+    return { users, more };
+  } finally {
+    await connection.end();
+  }
+}
+
+async deleteUser(userId) {
+  const connection = await this.getConnection();
+
+  try {
+    await connection.beginTransaction();
+
+    try {
+      const existing = await this.query(
+        connection,
+        'SELECT id FROM user WHERE id=? FOR UPDATE',
+        [userId]
+      );
+
+      if (existing.length === 0) {
+        throw new StatusCodeError('unknown user', 404);
+      }
+
+      await this.query(
+        connection,
+        'DELETE FROM auth WHERE userId=?',
+        [userId]
+      );
+
+      await this.query(
+        connection,
+        'DELETE FROM userRole WHERE userId=?',
+        [userId]
+      );
+
+      await this.query(
+        connection,
+        'DELETE FROM user WHERE id=?',
+        [userId]
+      );
+
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    }
+  } finally {
+    await connection.end();
+  }
+}
 
   async loginUser(userId, token) {
     token = this.getTokenSignature(token);
