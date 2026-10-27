@@ -468,7 +468,11 @@ async deleteUser(userId) {
         connection.end();
       }
     } catch (err) {
-      console.error(JSON.stringify({ message: 'Error initializing database', exception: err.message, connection: config.db.connection }));
+      console.error(JSON.stringify({
+       message: 'Error initializing database',
+       errorCode: err.code || 'UNKNOWN',
+       database: config.db.connection.database,
+      }));
     }
   }
 

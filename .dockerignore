@@ -1,0 +1,9 @@
+node_modules
+.git
+.github
+coverage
+dist
+.env
+.env.*
+src/config.js
+config.js
