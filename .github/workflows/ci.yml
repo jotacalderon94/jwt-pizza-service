@@ -94,12 +94,6 @@ jobs:
         run: |
           printf '{"version": "%s" }\n' '${{ needs.build.outputs.version }}' > src/version.json
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::923832452603:role/GitHubActionsJwtPizzaDeploy
-          aws-region: us-west-2
-
       - name: Inspect GitHub OIDC identity
         uses: actions/github-script@v7
         with:
@@ -112,7 +106,14 @@ jobs:
             core.info(`OIDC audience: ${payload.aud}`);
             core.info(`OIDC subject: ${payload.sub}`);
             core.info(`Repository: ${payload.repository}`);
-            core.info(`Ref: ${payload.ref}`);      
+            core.info(`Ref: ${payload.ref}`);   
+            
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::923832452603:role/GitHubActionsJwtPizzaDeploy
+          aws-region: us-west-2
+  
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
