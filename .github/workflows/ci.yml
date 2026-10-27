@@ -93,21 +93,7 @@ jobs:
       - name: Set application version
         run: |
           printf '{"version": "%s" }\n' '${{ needs.build.outputs.version }}' > src/version.json
-
-      - name: Inspect GitHub OIDC identity
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const token = await core.getIDToken('sts.amazonaws.com');
-            const payload = JSON.parse(
-              Buffer.from(token.split('.')[1], 'base64url').toString()
-            );
-
-            core.info(`OIDC audience: ${payload.aud}`);
-            core.info(`OIDC subject: ${payload.sub}`);
-            core.info(`Repository: ${payload.repository}`);
-            core.info(`Ref: ${payload.ref}`);   
-            
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
