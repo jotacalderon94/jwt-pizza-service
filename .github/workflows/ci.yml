@@ -110,5 +110,13 @@ jobs:
           REPOSITORY: jwt-pizza-service
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t "$REGISTRY/$REPOSITORY:$IMAGE_TAG" .
+          docker build -t "$REGISTRY/$REPOSITORY:$IMAGE_TAG" -t "$REGISTRY/$REPOSITORY:latest" .
           docker push "$REGISTRY/$REPOSITORY:$IMAGE_TAG"
+          docker push "$REGISTRY/$REPOSITORY:latest"
+
+      - name: Deploy new container
+        run: |
+          aws ecs update-service \
+            --cluster jwt-pizza-cluster \
+            --service jwt-pizza-service \
+            --force-new-deployment
