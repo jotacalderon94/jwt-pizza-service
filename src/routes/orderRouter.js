@@ -1,4 +1,5 @@
 const express = require('express');
+const metrics = require('../metrics.js');
 const config = require('../config.js');
 const { Role, DB } = require('../database/database.js');
 const { authRouter } = require('./authRouter.js');
@@ -77,20 +78,68 @@ orderRouter.post(
   '/',
   authRouter.authenticateToken,
   asyncHandler(async (req, res) => {
-    const orderReq = req.body;
-    const order = await DB.addDinerOrder(req.user, orderReq);
-    const r = await fetch(`${config.factory.url}/api/order`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', authorization: `Bearer ${config.factory.apiKey}` },
-      body: JSON.stringify({ diner: { id: req.user.id, name: req.user.name, email: req.user.email }, order }),
-    });
-    const j = await r.json();
-    if (r.ok) {
-      res.send({ order, followLinkToEndChaos: j.reportUrl, jwt: j.jwt });
-    } else {
-      res.status(500).send({ message: 'Failed to fulfill order at factory', followLinkToEndChaos: j.reportUrl });
+    const start = performance.now();
+
+    try {
+      const orderReq = req.body;
+      const order = await DB.addDinerOrder(req.user, orderReq);
+
+      const r = await fetch(`${config.factory.url}/api/order`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${config.factory.apiKey}`,
+        },
+        body: JSON.stringify({
+          diner: {
+            id: req.user.id,
+            name: req.user.name,
+            email: req.user.email,
+          },
+          order,
+        }),
+      });
+
+      const j = await r.json();
+
+      if (r.ok) {
+        const items = order.items || [];
+        const pizzasSold = items.length;
+        const revenue = items.reduce(
+          (total, item) => total + Number(item.price || 0),
+          0
+        );
+
+        metrics.increment('pizzas_sold_total', {}, pizzasSold);
+        metrics.increment('pizza_revenue_total', {}, revenue);
+
+        res.send({
+          order,
+          followLinkToEndChaos: j.reportUrl,
+          jwt: j.jwt,
+        });
+      } else {
+        metrics.increment('pizza_creation_failures_total', {
+          reason: 'factory',
+        });
+
+        res.status(500).send({
+          message: 'Failed to fulfill order at factory',
+          followLinkToEndChaos: j.reportUrl,
+        });
+      }
+    } catch (error) {
+      metrics.increment('pizza_creation_failures_total', {
+        reason: 'exception',
+      });
+
+      throw error;
+    } finally {
+      metrics.observe(
+        'pizza_creation_duration_ms',
+        performance.now() - start
+      );
     }
   })
 );
-
 module.exports = orderRouter;

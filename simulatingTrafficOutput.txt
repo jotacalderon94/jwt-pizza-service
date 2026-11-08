@@ -1,0 +1,293 @@
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Login diner... true
+Login franchisee... true
+Login hungry diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Bought too many pizzas... 500
+Requesting menu... 200
+Requesting menu... 200
+Logging out hungry diner... 401
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out franchisee... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Login franchisee... true
+Logging out diner... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Logging out franchisee... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Login franchisee... true
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Login hungry diner... true
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out franchisee... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Login franchisee... true
+Requesting menu... 200
+Bought too many pizzas... 500
+Requesting menu... 200
+Requesting menu... 200
+Logging out hungry diner... 200
+Requesting menu... 200
+Logging out diner... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out franchisee... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Login franchisee... true
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Login diner... true
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out diner... 200
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging out franchisee... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Login franchisee... true
+Logging in with invalid credentials... 404
+Requesting menu... 200
+Login diner... true
+Requesting menu... 200
+Bought a pizza... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Logging in with invalid credentials... 404
+Logging out diner... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
+Requesting menu... 200
